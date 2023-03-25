@@ -1,0 +1,77 @@
+{
+  "fields": [
+    {
+      "type": "text",
+      "label": "Name",
+      "name": "name",
+      "placeholder": "Enter your name",
+      "required": true,
+      "position": "inline"
+    },
+
+    {
+      "type": "date",
+      "label": "Date",
+      "name": "date",
+      "placeholder": "Enter your date",
+      "required": true,
+      "position": "row"
+    },
+    {
+      "type": "select",
+      "label": "Country",
+      "name": "country",
+      "position": "row",
+      "options": [
+        { "text": "Select a country", "value": "" },
+        { "text": "Canada", "value": "ca" },
+        { "text": "United States", "value": "us" },
+        { "text": "United Kingdom", "value": "uk" }
+      ],
+      "required": true,
+      "relationship": {
+        "target": "city",
+        "rules": [
+          {
+            "value": "ca",
+            "options": [
+              { "text": "Toronto", "value": "toronto" },
+              { "text": "Vancouver", "value": "vancouver" },
+              { "text": "Montreal", "value": "montreal" }
+            ]
+          },
+          {
+            "value": "us",
+            "options": [
+              { "text": "New York", "value": "new-york" },
+              { "text": "Los Angeles", "value": "los-angeles" },
+              { "text": "Chicago", "value": "chicago" }
+            ]
+          },
+          {
+            "value": "uk",
+            "options": [
+              { "text": "London", "value": "london" },
+              { "text": "Manchester", "value": "manchester" },
+              { "text": "Edinburgh", "value": "edinburgh" }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "select",
+      "label": "City",
+      "name": "city",
+      "options": [{ "text": "Select a city", "value": "" }],
+      "required": true,
+      "position": "inline"
+    },
+    {
+      "type": "checkbox",
+      "label": "Select checkbox",
+      "name": "checkbox",
+      "position": "row"
+    }
+  ]
+}
