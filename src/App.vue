@@ -1,24 +1,33 @@
 <template>
   <div class="mt-20">
     <div class="container mx-auto px-10">
-      <h1 class="text-3xl text-center mb-4">Dynamic form</h1>
-      <DynamicForm :config="formConfig" />
+      <nav class="mb-20">
+        <ul class="flex space-x-4">
+          <li>
+            <router-link
+              to="/"
+              class="px-4 py-2 text-gray-700 rounded hover:bg-gray-200"
+              active-class="bg-gray-200 font-bold"
+            >
+              Dynamic form
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/toolBox"
+              class="px-4 py-2 text-gray-700 rounded hover:bg-gray-200"
+              active-class="bg-gray-200 font-bold"
+            >
+              Tool box
+            </router-link>
+          </li>
+        </ul>
+      </nav>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import DynamicForm from '@/components/DynamicForm.vue';
-import formConfig from '@/assets/formConfig.json';
-
-export default {
-  components: {
-    DynamicForm,
-  },
-  data() {
-    return {
-      formConfig,
-    };
-  },
-};
+export default {};
 </script>

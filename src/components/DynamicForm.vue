@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submit" class="flex flex-wrap w-full gap-4">
-    <div v-for="field in fields" :key="field.name" :class="getFieldClasses(field)">
+    <div v-for="(field, index) in fields" :key="index" :class="getFieldClasses(field)">
       <div v-if="field.type === 'text'">
         <input
           :type="field.type"
@@ -55,7 +55,7 @@ export default {
   },
   data() {
     return {
-      fields: JSON.parse(JSON.stringify(this.config.fields)),
+      fields: JSON.parse(JSON.stringify(this.config)),
     };
   },
   methods: {
@@ -70,6 +70,9 @@ export default {
     },
     getFieldClasses(field) {
       return field.position === 'row' ? ['w-auto'] : ['w-full'];
+    },
+    submit() {
+      console.log('Submitted!');
     },
   },
 };
