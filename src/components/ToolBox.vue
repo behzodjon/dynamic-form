@@ -95,14 +95,14 @@
                       />
                       <button
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-                        @click.prevent="removeFieldRuleOption(rule, ruleIndex, optionIndex)"
+                        @click.prevent="removeFieldRuleOption(rule, optionIndex)"
                       >
                         -
                       </button>
                     </div>
                     <button
                       class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
-                      @click.prevent="addFieldRuleOption(rule, ruleIndex)"
+                      @click.prevent="addFieldRuleOption(rule)"
                     >
                       Add Option
                     </button>
@@ -132,35 +132,62 @@ export default {
     onDropZoneClick() {
       this.$refs.fileInput.click();
     },
-    handleFileUpload(event) {
-      const file = event.target.files[0];
+
+    parseFile(file) {
       const reader = new FileReader();
 
-      reader.onload = (event) => {
-        const data = JSON.parse(event.target.result);
-        this.fields = data;
-      };
-
-      reader.readAsText(file);
+      return new Promise((resolve, reject) => {
+        reader.onload = (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            resolve(data);
+          } catch (err) {
+            reject(err);
+          }
+        };
+        reader.readAsText(file);
+      });
     },
+
+    async handleFileUpload(event) {
+      const file = event.target.files[0];
+      this.fields = await this.parseFile(file);
+    },
+
+    async handleDrop(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const files = event.dataTransfer.files;
+      if (files.length > 0) {
+        const file = files[0];
+        this.fields = await this.parseFile(file);
+      }
+    },
+
     removeField(index) {
       this.fields.splice(index, 1);
     },
+
     addFieldOption(field) {
       field.options.push({ text: '', value: '' });
     },
-    addFieldRuleOption(rule, ruleIndex, optionIndex) {
+
+    addFieldRuleOption(rule) {
       rule.options.push({
         text: '',
         value: '',
       });
     },
-    removeFieldRuleOption(rule, ruleIndex, optionIndex) {
+
+    removeFieldRuleOption(rule, optionIndex) {
       rule.options.splice(optionIndex, 1);
     },
+
     removeFieldOption(field, index) {
       field.options.splice(index, 1);
     },
+
     submitForm() {
       const data = JSON.stringify(this.fields, null, 2);
       const file = new Blob([data], { type: 'application/json' });

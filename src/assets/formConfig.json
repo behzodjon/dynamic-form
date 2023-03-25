@@ -15,7 +15,6 @@
     "required": true,
     "position": "row"
   },
-
   {
     "type": "select",
     "label": "Country",
@@ -41,6 +40,10 @@
       {
         "text": "Uzbekistan",
         "value": "uz"
+      },
+      {
+        "text": "Tailand",
+        "value": "tl"
       }
     ],
     "required": true,
@@ -52,20 +55,16 @@
           "value": "ca",
           "options": [
             {
+              "text": "Toronto",
+              "value": "toronto"
+            },
+            {
               "text": "Vancouver",
               "value": "vancouver"
             },
             {
               "text": "Montreal",
               "value": "montreal"
-            },
-            {
-              "text": "Alberta",
-              "value": "alberta"
-            },
-            {
-              "text": "Toronto",
-              "value": "Toronto"
             }
           ]
         },
@@ -100,6 +99,10 @@
             {
               "text": "Edinburgh",
               "value": "edinburgh"
+            },
+            {
+              "text": "Newcastle",
+              "value": "newcastle"
             }
           ]
         }
